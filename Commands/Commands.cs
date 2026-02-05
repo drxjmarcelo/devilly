@@ -17,5 +17,11 @@ namespace Devilly.Cmd
         {
             await ctx.RespondAsync("Lista de comandos: \nd!ping - check bot. \nd!users - list user stats");
         }
+
+        [Command("users")]
+        public async Task UserStats(CommandContext ctx)
+        {
+            await ctx.RespondAsync("Função ainda não configurada.");
+        }
     }   
 }

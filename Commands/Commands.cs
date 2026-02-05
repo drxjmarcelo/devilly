@@ -12,14 +12,14 @@ namespace Devilly.Cmd
             await ctx.RespondAsync("Pong 😈");
         }
 
-        [Command("help")]
-        public async Task Help(CommandContext ctx)
-        {
-            await ctx.RespondAsync("Lista de comandos: \nd!ping - check bot. \nd!users - list user stats");
-        }
-
         [Command("users")]
         public async Task UserStats(CommandContext ctx)
+        {
+            await ctx.RespondAsync("Função ainda não configurada.");
+        }
+
+        [Command("Servers")]
+        public async Task ServerStats(CommandContext ctx)
         {
             await ctx.RespondAsync("Função ainda não configurada.");
         }

@@ -15,11 +15,27 @@ namespace Devilly.Cmd
         [Command("users")]
         public async Task UserStats(CommandContext ctx)
         {
+            var stats = Program.StatsService.GetUserStats(ctx.User.Id);
+
+            if (stats == null)
+            {
+                await ctx.RespondAsync("Sem dados ainda.");
+                return;
+            }
+
+            await ctx.RespondAsync($"📊 Stats de {ctx.User.Username}\n" + $"Mensagens: {stats.MessageCount}");
+            Console.WriteLine($"Mensagem de {ctx.User.Id} registrada!");
+        }
+
+
+        [Command("servers")]
+        public async Task ServerStats(CommandContext ctx)
+        {
             await ctx.RespondAsync("Função ainda não configurada.");
         }
 
-        [Command("Servers")]
-        public async Task ServerStats(CommandContext ctx)
+        [Command("channels")]
+        public async Task ChannelStats(CommandContext ctx)
         {
             await ctx.RespondAsync("Função ainda não configurada.");
         }

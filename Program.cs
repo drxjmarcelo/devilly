@@ -7,8 +7,11 @@ using System.Text.Json;
 
 class Program
 {
+    public static Devilly.Svc.StatsService StatsService { get; private set; }
     static async Task Main(string[] args)
     {
+        StatsService = new Devilly.Svc.StatsService();
+        
         var json = File.ReadAllText("config.json");
         var configJson = JsonSerializer.Deserialize<Config>(json);
 
@@ -34,6 +37,20 @@ class Program
 
         commands.RegisterCommands<Devilly.Cmd.Commands>();
 
+        var statsService = new Devilly.Svc.StatsService();
+
+        client.MessageCreated += async (c, e) =>
+        {
+            if (e.Author.IsBot) return;
+
+            statsService.RegisterMessage(
+                e.Author.Id,
+                e.Channel.Id,
+                e.Guild.Id,
+                e.Message.CreationTimestamp.UtcDateTime
+            );
+        };
+
         client.Ready += async (c, e) =>
         {
             Console.WriteLine("Devil.ly está online 😈");
@@ -41,5 +58,6 @@ class Program
 
         await client.ConnectAsync();
         await Task.Delay(-1);
+
     }
 }

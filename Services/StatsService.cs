@@ -41,6 +41,8 @@ namespace Devilly.Svc
 
             _userStats[userId].MessageCount++;
             _userStats[userId].LastMessageTime = time;
+            Console.WriteLine($"Mensagem de {userId} registrada!");
+
         }
 
         public Devilly.Models.UserStats GetUserStats(ulong userId)

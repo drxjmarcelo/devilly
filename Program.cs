@@ -37,13 +37,11 @@ class Program
 
         commands.RegisterCommands<Devilly.Cmd.Commands>();
 
-        var statsService = new Devilly.Svc.StatsService();
-
         client.MessageCreated += async (c, e) =>
         {
-            if (e.Author.IsBot) return;
+            if (e.Author.IsBot || e.Guild == null) return;
 
-            statsService.RegisterMessage(
+            StatsService.RegisterMessage(
                 e.Author.Id,
                 e.Channel.Id,
                 e.Guild.Id,
